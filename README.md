@@ -14,10 +14,10 @@ In CVPR2021 <br>
 ## Example Results
 
 ### Unpaired Image-to-Image Translation
-<img src='images/unpairedI2I-translation.gif' align="center">
+<img src='imgs/unpairedI2I-translation.gif' align="center">
 
 ### Single Image Translation
-<img src='images/single-translation.gif' align="center">
+<img src='imgs/single-translation.gif' align="center">
 
 ## [More results on project page]()
 
