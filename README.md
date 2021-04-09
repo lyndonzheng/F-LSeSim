@@ -5,8 +5,7 @@
 <br>
 
 <img src='imgs/FSeSim-frame.gif' align="center">
-
-<br><br><br>
+<br>
 
 We provide the Pytorch implementation of "The Spatially-Correlative Loss for Various Image Translation Tasks". Based on the inherent self-similarity of object, we propose a new structure-preserving loss for one-sided unsupervised I2I network. The new loss will *deal only with spatial relationship of repeated signal, regardless of their original absolute value*. 
 
@@ -32,7 +31,7 @@ In CVPR2021 <br>
 ### Installation
 This code was tested with Pytorch 1.7.0, CUDA 10.2, and Python 3.7
 
-- Install Pytoch 0.4, torchvision, and other dependencies from [http://pytorch.org](http://pytorch.org)
+- Install Pytoch 1.7.0, torchvision, and other dependencies from [http://pytorch.org](http://pytorch.org)
 - Install python libraries [visdom](https://github.com/facebookresearch/visdom) and [dominate](https://github.com/Knio/dominate) for visualization
 
 ```
@@ -56,7 +55,7 @@ Please refer to the original [CUT](https://github.com/taesungp/contrastive-unpai
 sh ./scripts/train_sc.sh 
 ```
 
-- Set ```--use_norm``` for cosine similarity map, the default similarity is dot-based attention score. ```--learned_attn, --augment``` for the learned self-similarity for specific task.
+- Set ```--use_norm``` for cosine similarity map, the default similarity is dot-based attention score. ```--learned_attn, --augment``` for the learned self-similarity.
 - To view training results and loss plots, run ```python -m visdom.server``` and copy the URL [http://localhost:port](http://localhost:port).
 - Training models will be saved under the **checkpoints** folder.
 - The more training options can be found in **options** folder.
@@ -69,7 +68,7 @@ sh ./scripts/train_sc.sh
 sh ./scripts/train_sinsc.sh 
 ```
 
-As *multi-modal* I2I translation model is trained on [MUNIT](https://github.com/NVlabs/MUNIT), we would not plan to merge the code to this repository. If you wish to obtain multi-modal results, please contact us at chuanxia001@e.ntu.edu.sg.
+As *multi-modal* I2I translation model was trained on [MUNIT](https://github.com/NVlabs/MUNIT), we would not plan to merge the code to this repository. If you wish to obtain multi-modal results, please contact us at chuanxia001@e.ntu.edu.sg.
 
 ### Testing
 
