@@ -220,7 +220,7 @@ class PatchSim(nn.Module):
         feat = feat - feat.mean(dim=[-2, -1], keepdim=True)
         feat = F.normalize(feat, dim=1) if self.use_norm else feat / np.sqrt(C)
         query, key, patch_ids = self.select_patch(feat, patch_ids=patch_ids)
-        patch_sim = query.bmm(key) if self.use_norm else F.tanh(query.bmm(key))
+        patch_sim = query.bmm(key) if self.use_norm else torch.tanh(query.bmm(key)/6)
         if patch_ids is not None:
             patch_sim = patch_sim.view(B, len(patch_ids), -1)
 
@@ -260,11 +260,12 @@ class PatchSim(nn.Module):
 
         return feat_query, feat_key, patch_ids
 
+
 class SpatialCorrelativeLoss(nn.Module):
     """
     learnable patch-based spatially-correlative loss with contrastive learning
     """
-    def __init__(self, loss_mode='cos', patch_nums=256, patch_size=32, norm=True, use_prop=True, use_conv=True,
+    def __init__(self, loss_mode='cos', patch_nums=256, patch_size=32, norm=True, use_conv=True,
                  init_type='normal', init_gain=0.02, gpu_ids=[], T=0.1):
         super(SpatialCorrelativeLoss, self).__init__()
         self.patch_sim = PatchSim(patch_nums=patch_nums, patch_size=patch_size, norm=norm)
@@ -278,7 +279,7 @@ class SpatialCorrelativeLoss(nn.Module):
         self.gpu_ids = gpu_ids
         self.loss_mode = loss_mode
         self.T = T
-        self.criterion = nn.SmoothL1Loss()
+        self.criterion = nn.L1Loss() if norm else nn.SmoothL1Loss()
         self.cross_entropy_loss = nn.CrossEntropyLoss()
 
     def update_init_(self):
@@ -347,7 +348,7 @@ class SpatialCorrelativeLoss(nn.Module):
             src = torch.where(sim_src < src_sorted[:, :, num:num + 1], 0 * sim_src, sim_src)
             tgt = torch.where(sim_src < src_sorted[:, :, num:num + 1], 0 * sim_tgt, sim_tgt)
             if self.loss_mode == 'l1':
-                loss = (N / num) * self.criterion(src, tgt)
+                loss = self.criterion((N / num) * src, (N / num) * tgt)
             elif self.loss_mode == 'cos':
                 sim_pos = F.cosine_similarity(src, tgt, dim=-1)
                 loss = self.criterion(torch.ones_like(sim_pos), sim_pos)

@@ -4,7 +4,11 @@
 [arXiv](https://arxiv.org/abs/2104.00854) | [website]()
 <br>
 
-We provide our Pytorch implementation of "The Spatially-Correlative Loss for Various Image Translation Tasks".
+<img src='imgs/FSeSim-frame.gif' align="center">
+
+<br><br><br>
+
+We provide the Pytorch implementation of "The Spatially-Correlative Loss for Various Image Translation Tasks". Based on the inherent self-similarity of object, we propose a new structure-preserving loss for one-sided unsupervised I2I network. The new loss will *deal only with spatial relationship of repeated signal, regardless of their original absolute value*. 
 
 [The Spatially-Correlative Loss for Various Image Translation Tasks](https://arxiv.org/abs/2104.00854) <br>
 [Chuanxia Zheng](http://www.chuanxiaz.com), [Tat-Jen Cham](http://www.ntu.edu.sg/home/astjcham/), [Jianfei Cai](https://research.monash.edu/en/persons/jianfei-cai) <br>
@@ -14,24 +18,82 @@ In CVPR2021 <br>
 ## Example Results
 
 ### Unpaired Image-to-Image Translation
+
 <img src='imgs/unpairedI2I-translation.gif' align="center">
 
 ### Single Image Translation
+
 <img src='imgs/single-translation.gif' align="center">
 
-## [More results on project page]()
+### [More results on project page]()
 
 ## Getting Started
 
 ### Installation
+This code was tested with Pytorch 1.7.0, CUDA 10.2, and Python 3.7
 
-### Datasets
+- Install Pytoch 0.4, torchvision, and other dependencies from [http://pytorch.org](http://pytorch.org)
+- Install python libraries [visdom](https://github.com/facebookresearch/visdom) and [dominate](https://github.com/Knio/dominate) for visualization
+
+```
+pip install visdom dominate
+```
+- Clone this repo:
+
+```
+git clone https://github.com/lyndonzheng/F-LSeSim
+cd F-LSeSim
+```
+
+### [Datasets](https://github.com/taesungp/contrastive-unpaired-translation/blob/master/docs/datasets.md)
+Please refer to the original [CUT](https://github.com/taesungp/contrastive-unpaired-translation) and [CycleGAN](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix) to download datasets and learn how to create your own datasets.
 
 ### Training
 
+- Train the *single-modal* I2I translation model:
+
+```
+sh ./scripts/train_sc.sh 
+```
+
+- Set ```--use_norm``` for cosine similarity map, the default similarity is dot-based attention score. ```--learned_attn, --augment``` for the learned self-similarity for specific task.
+- To view training results and loss plots, run ```python -m visdom.server``` and copy the URL [http://localhost:port](http://localhost:port).
+- Training models will be saved under the **checkpoints** folder.
+- The more training options can be found in **options** folder.
+<br><br>
+
+
+- Train the *single-image* translation model:
+
+```
+sh ./scripts/train_sinsc.sh 
+```
+
+As *multi-modal* I2I translation model is trained on [MUNIT](https://github.com/NVlabs/MUNIT), we would not plan to merge the code to this repository. If you wish to obtain multi-modal results, please contact us at chuanxia001@e.ntu.edu.sg.
+
 ### Testing
 
+- Test the *single-modal* I2I translation model:
+
+```
+sh ./scripts/test_sc.sh
+```
+
+- Test the *single-image* translation model:
+
+```
+sh ./scripts/test_sinsc.sh
+```
+
+- Test the FID score for all training epochs:
+
+```
+sh ./scripts/test_fid.sh
+```
+
 ### Pretrained Models
+
+Download the pre-trained models (will be released soon) using the following links and put them under```checkpoints/``` directory.
 
 ## Citation
 ```

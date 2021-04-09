@@ -27,7 +27,7 @@ class SinSCModel(SCModel):
             lambda_identity=0.0,
             lambda_gradient=1.0,
             lambda_spatial_idt=0.0,
-            ngf=10,
+            ngf=8,
             ndf=8,
             lr=0.001,
             beta1=0.0,

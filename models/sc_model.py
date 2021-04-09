@@ -25,7 +25,6 @@ class SCModel(BaseModel):
         parser.add_argument('--patch_size', type=int, default=32, help='patch size to calculate the attention')
         parser.add_argument('--loss_mode', type=str, default='cos', help='which loss type is used, cos | l1 | info')
         parser.add_argument('--use_norm', action='store_true', help='normalize the feature map for FLSeSim')
-        parser.add_argument('--use_prop', action='store_true', help='use propagate for average patch similarity')
         parser.add_argument('--learned_attn', action='store_true', help='use the learnable attention map')
         parser.add_argument('--augment', action='store_true', help='use data augmentation for contrastive learning')
         parser.add_argument('--T', type=float, default=0.07, help='temperature for similarity')
@@ -76,7 +75,7 @@ class SCModel(BaseModel):
             self.criterionIdt = torch.nn.L1Loss()
             self.criterionStyle = losses.StyleLoss().to(self.device)
             self.criterionFeature = losses.PerceptualLoss().to(self.device)
-            self.criterionSpatial = losses.SpatialCorrelativeLoss(opt.loss_mode, opt.patch_nums, opt.patch_size, opt.use_norm, opt.use_prop,
+            self.criterionSpatial = losses.SpatialCorrelativeLoss(opt.loss_mode, opt.patch_nums, opt.patch_size, opt.use_norm,
                                     opt.learned_attn, gpu_ids=self.gpu_ids, T=opt.T).to(self.device)
             self.normalization = losses.Normalization(self.device)
             # define the contrastive loss
@@ -247,4 +246,4 @@ class SCModel(BaseModel):
         if not self.criterionSpatial.conv_init:
             self.criterionSpatial.update_init_()
 
-        return total_loss
+        return total_loss / n_layers
