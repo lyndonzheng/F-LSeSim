@@ -220,7 +220,7 @@ class PatchSim(nn.Module):
         feat = feat - feat.mean(dim=[-2, -1], keepdim=True)
         feat = F.normalize(feat, dim=1) if self.use_norm else feat / np.sqrt(C)
         query, key, patch_ids = self.select_patch(feat, patch_ids=patch_ids)
-        patch_sim = query.bmm(key) if self.use_norm else torch.tanh(query.bmm(key)/6)
+        patch_sim = query.bmm(key) if self.use_norm else torch.tanh(query.bmm(key)/10)
         if patch_ids is not None:
             patch_sim = patch_sim.view(B, len(patch_ids), -1)
 
@@ -343,10 +343,10 @@ class SpatialCorrelativeLoss(nn.Module):
             sam_self = torch.cat([sam_self, sam_neg1, sam_neg2], dim=-1)
             loss = self.cross_entropy_loss(sam_self, torch.arange(0, sam_self.size(0), dtype=torch.long, device=sim_src.device) % (Num))
         else:
-            src_sorted, _ = sim_src.sort(dim=-1, descending=True)
-            num = int(N / 2)
-            src = torch.where(sim_src < src_sorted[:, :, num:num + 1], 0 * sim_src, sim_src)
-            tgt = torch.where(sim_src < src_sorted[:, :, num:num + 1], 0 * sim_tgt, sim_tgt)
+            tgt_sorted, _ = sim_tgt.sort(dim=-1, descending=True)
+            num = int(N / 4)
+            src = torch.where(sim_tgt < tgt_sorted[:, :, num:num + 1], 0 * sim_src, sim_src)
+            tgt = torch.where(sim_tgt < tgt_sorted[:, :, num:num + 1], 0 * sim_tgt, sim_tgt)
             if self.loss_mode == 'l1':
                 loss = self.criterion((N / num) * src, (N / num) * tgt)
             elif self.loss_mode == 'cos':

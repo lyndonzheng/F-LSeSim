@@ -1,7 +1,7 @@
 
 # Spatially-Correlative Loss
 
-[arXiv](https://arxiv.org/abs/2104.00854) | [website]()
+[arXiv](https://arxiv.org/abs/2104.00854) | [website](http://www.chuanxiaz.com/publication/flsesim/)
 <br>
 
 <img src='imgs/FSeSim-frame.gif' align="center">
@@ -24,7 +24,7 @@ In CVPR2021 <br>
 
 <img src='imgs/single-translation.gif' align="center">
 
-### [More results on project page]()
+### [More results on project page](http://www.chuanxiaz.com/publication/flsesim/)
 
 ## Getting Started
 
@@ -96,7 +96,7 @@ Download the pre-trained models (will be released soon) using the following link
 
 ## Citation
 ```
-@inproceedings{zheng2019pluralistic,
+@inproceedings{zheng2021spatiallycorrelative,
   title={The Spatially-Correlative Loss for Various Image Translation Tasks},
   author={Zheng, Chuanxia and Cham, Tat-Jen and Cai, Jianfei},
   booktitle={Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition},
