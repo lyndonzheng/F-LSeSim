@@ -58,7 +58,7 @@ sh ./scripts/train_sc.sh
 - Set ```--use_norm``` for cosine similarity map, the default similarity is dot-based attention score. ```--learned_attn, --augment``` for the learned self-similarity.
 - To view training results and loss plots, run ```python -m visdom.server``` and copy the URL [http://localhost:port](http://localhost:port).
 - Training models will be saved under the **checkpoints** folder.
-- The more training options can be found in **options** folder.
+- The more training options can be found in the **options** folder.
 <br><br>
 
 
@@ -68,7 +68,7 @@ sh ./scripts/train_sc.sh
 sh ./scripts/train_sinsc.sh 
 ```
 
-As *multi-modal* I2I translation model was trained on [MUNIT](https://github.com/NVlabs/MUNIT), we would not plan to merge the code to this repository. If you wish to obtain multi-modal results, please contact us at chuanxia001@e.ntu.edu.sg.
+As the *multi-modal* I2I translation model was trained on [MUNIT](https://github.com/NVlabs/MUNIT), we would not plan to merge the code to this repository. If you wish to obtain multi-modal results, please contact us at chuanxia001@e.ntu.edu.sg.
 
 ### Testing
 
@@ -93,6 +93,8 @@ sh ./scripts/test_fid.sh
 ### Pretrained Models
 
 Download the pre-trained models (will be released soon) using the following links and put them under```checkpoints/``` directory.
+
+- ```Single-image translation model```: [image2monet](https://drive.google.com/drive/folders/1QcGY9H0USWHJtcifRMWh_KHOJszME6-U?usp=sharing)
 
 ## Citation
 ```

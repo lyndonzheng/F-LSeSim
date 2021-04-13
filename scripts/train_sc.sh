@@ -1,7 +1,7 @@
 set -ex
 python train.py  \
 --dataroot /media/lyndon/c6f4bbbd-8d47-4dcb-b0db-d788fe2b25571/dataset/image_translation/horse2zebra \
---name horse2zebra_F47_cosT4tgt_p256_newCUT_w10 \
+--name horse2zebra_F47_cosT4tgt_p256_oriCUT_w10 \
 --model sc \
 --gpu_ids 2 \
 --lambda_spatial 10 \
