@@ -14,6 +14,11 @@ We provide the Pytorch implementation of "The Spatially-Correlative Loss for Var
 NTU and Monash University <br>
 In CVPR2021 <br>
 
+## ToDo
+
+- release the single-modal I2I model
+- a simple example to use the proposed loss
+
 ## Example Results
 
 ### Unpaired Image-to-Image Translation

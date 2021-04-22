@@ -8,21 +8,20 @@ from . import losses
 
 class SCModel(BaseModel):
     """
-    This class implements the unpaired image translation model with spatial consistency loss
+    This class implements the unpaired image translation model with spatially correlative loss
     """
 
     @staticmethod
     def modify_commandline_options(parser, is_train=True):
         """
         :param parser: original options parser
-        :param is_train: whether training phase or test phase. You can use this flag to add training-specific or test-specific options
         :return: the modified parser
         """
         parser.set_defaults(no_dropout=True)
 
         parser.add_argument('--attn_layers', type=str, default='4, 7', help='compute spatial loss on which layers')
         parser.add_argument('--patch_nums', type=float, default=256, help='select how many patches for shape consistency, -1 use all')
-        parser.add_argument('--patch_size', type=int, default=32, help='patch size to calculate the attention')
+        parser.add_argument('--patch_size', type=int, default=64, help='patch size to calculate the attention')
         parser.add_argument('--loss_mode', type=str, default='cos', help='which loss type is used, cos | l1 | info')
         parser.add_argument('--use_norm', action='store_true', help='normalize the feature map for FLSeSim')
         parser.add_argument('--learned_attn', action='store_true', help='use the learnable attention map')
@@ -58,7 +57,7 @@ class SCModel(BaseModel):
             self.netD = networks.define_D(opt.output_nc, opt.ndf, opt.netD, opt.n_layers_D, opt.norm,
                                           opt.init_type, opt.init_gain, opt.no_antialias, self.gpu_ids, opt)
             self.attn_layers = [int(i) for i in self.opt.attn_layers.split(',')]
-            if opt.lambda_identity > 0.0 or opt.lambda_spatial_idt > 0.0:  # only works when input and output images have the same number of channels
+            if opt.lambda_identity > 0.0 or opt.lambda_spatial_idt > 0.0:
                 # only works when input and output images have the same number of channels
                 self.visual_names.append('idt_B')
                 if opt.lambda_identity > 0.0:
