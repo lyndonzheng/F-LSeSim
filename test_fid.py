@@ -98,7 +98,7 @@ if __name__ == '__main__':
         plt.text(a, b, str(round(b, 2)))
     plt.xlabel('Epoch')
     plt.ylabel('FID on test set')
-    plt.title('horse -> zebra ')
+    plt.title(opt.name)
     plt.savefig(os.path.join(opt.results_dir, opt.name, 'fid.jpg'))
 
 

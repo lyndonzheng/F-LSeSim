@@ -19,7 +19,7 @@ class SCModel(BaseModel):
         """
         parser.set_defaults(no_dropout=True)
 
-        parser.add_argument('--attn_layers', type=str, default='4, 7', help='compute spatial loss on which layers')
+        parser.add_argument('--attn_layers', type=str, default='4, 7, 9', help='compute spatial loss on which layers')
         parser.add_argument('--patch_nums', type=float, default=256, help='select how many patches for shape consistency, -1 use all')
         parser.add_argument('--patch_size', type=int, default=64, help='patch size to calculate the attention')
         parser.add_argument('--loss_mode', type=str, default='cos', help='which loss type is used, cos | l1 | info')

@@ -15,8 +15,6 @@ NTU and Monash University <br>
 In CVPR2021 <br>
 
 ## ToDo
-
-- release the single-modal I2I model
 - a simple example to use the proposed loss
 
 ## Example Results
@@ -99,6 +97,7 @@ sh ./scripts/test_fid.sh
 
 Download the pre-trained models (will be released soon) using the following links and put them under```checkpoints/``` directory.
 
+- ```Single-modal translation model```: [horse2zebra](https://drive.google.com/drive/folders/1k8Y5R6CnaDwfkha_lD5_yQTvoajoU6GR?usp=sharing), [semantic2image](https://drive.google.com/drive/folders/1xnF6wLTPhD35-2It8IIomJRhFZdr2qXp?usp=sharing), [apple2orange](https://drive.google.com/drive/folders/1Z9PwxkWlakDdv12Jha6WJRgO6cSfEZGs?usp=sharing)
 - ```Single-image translation model```: [image2monet](https://drive.google.com/drive/folders/1QcGY9H0USWHJtcifRMWh_KHOJszME6-U?usp=sharing)
 
 ## Citation
