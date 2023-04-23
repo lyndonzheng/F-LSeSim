@@ -27,7 +27,7 @@ In CVPR2021 <br>
 
 <img src='imgs/single-translation.gif' align="center">
 
-### [More results on project page](http://www.chuanxiaz.com/publication/flsesim/)
+### [More results on project page](https://www.chuanxiaz.com/flsesim/)
 
 ## Getting Started
 
